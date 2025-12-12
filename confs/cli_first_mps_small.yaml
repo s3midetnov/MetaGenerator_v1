@@ -3,8 +3,9 @@ trainer:
   accelerator: mps
   devices: 1
   precision: bf16-mixed
-  fast_dev_run: true
-  max_steps: 30000 #500000
+  fast_dev_run: false
+#  max_steps: 30000 #500000
+  max_epochs: 1
   check_val_every_n_epoch: 1
   num_sanity_val_steps: 0
   callbacks:
@@ -28,7 +29,7 @@ model:
   eval_num_theorems: 100  # Lower this number will make validation faster (but noiser). <-- 250
 
 data:
-  data_path: /Users/artem.semidetnov/Desktop/MetaGenerator_v1/dataset/
+  data_path: ./dataset_very_small/
   batch_size: 3  # effective_batch_size == batch_size * accumulate_grad_batches * devices
   eval_batch_size: 64
   max_inp_seq_len: 512
