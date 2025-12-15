@@ -2,7 +2,7 @@ import json
 import random
 from typing import List, Any, Optional
 
-def parse_concatenated_json(path):
+def parse_concatenated_json(path) -> List[Any]:
     objects = []
     buffer = []
     brace_level = 0
@@ -46,6 +46,7 @@ def format_augmented_goal(
         aug_s = p_str + aug_s
 
     aug_s += s
+    # print('xxxxxxxxxxx state xxxxxxxxxxxxxx = \n', aug_s)
     return aug_s
 
 # Code that transforms Arend lib samples into trainable data, LLM version 0

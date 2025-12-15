@@ -42,6 +42,7 @@ class GeneratorDataset(Dataset):
                     "context": thm["Context"], # = ?
                 }
             )
+        logger.info(f"{len(data)} examples loaded")
         return data
 
     def __len__(self) -> int:

@@ -4,8 +4,8 @@ trainer:
   devices: 1
   precision: bf16-mixed
   fast_dev_run: false
-  max_steps: 10000 #500000
-  max_epochs: 1
+  max_steps: 50000
+  max_epochs: 2
   check_val_every_n_epoch: 1
   num_sanity_val_steps: 0
   callbacks:
@@ -26,7 +26,7 @@ model:
   eval_num_retrieved: 100
   eval_num_workers: 1  # Lower this number if you don't have 80GB GPU memory. <-- 5
   eval_num_gpus: 1
-  eval_num_theorems: 100  # Lower this number will make validation faster (but noiser). <-- 250
+  eval_num_theorems: 200  # Lower this number will make validation faster (but noiser). <-- 250
 
 data:
   data_path: ./dataset_small/
@@ -34,5 +34,5 @@ data:
   eval_batch_size: 64
   max_inp_seq_len: 512
   max_oup_seq_len: 128
-  p_drop: 0.5
+  p_drop: 0
   num_workers: 2
