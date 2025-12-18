@@ -49,7 +49,7 @@ def format_augmented_goal(
     # print('xxxxxxxxxxx state xxxxxxxxxxxxxx = \n', aug_s)
     return aug_s
 
-# Code that transforms Arend lib samples into trainable data, LLM version 0
+# Code that transforms Arend lib samples into trainable dataOld, LLM version 0
 def jsonl_to_prompt_refactor0(entry : dict) -> dict:
     two_field_dict = dict()
     two_field_dict['prompt'] = str(entry['Context']) + " " + str(entry['Premises']) + " " + entry['Expected type']
@@ -57,14 +57,14 @@ def jsonl_to_prompt_refactor0(entry : dict) -> dict:
     return two_field_dict
 
 
-# Code that transforms Arend lib samples into trainable data, LLM version 1
+# Code that transforms Arend lib samples into trainable dataOld, LLM version 1
 def jsonl_to_prompt_refactor1(entry : dict) -> dict:
     two_field_dict = dict()
     two_field_dict['prompt'] = "<<<Context:>>> "+ str(entry['Context']) + "<<<Premises:>>> " + str(entry['Premises']) + "<<<Expected type:>>> " + entry['Expected type']
     two_field_dict['completion'] = entry['Expression']
     return two_field_dict
 
-# Code that transforms Arend lib samples into trainable data, LLM version 2
+# Code that transforms Arend lib samples into trainable dataOld, LLM version 2
 
 def jsonl_to_prompt_refactor2(entry : dict) -> dict:
         processed_prompt = {

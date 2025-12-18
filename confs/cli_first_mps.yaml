@@ -29,7 +29,7 @@ model:
   eval_num_theorems: 100  # Lower this number will make validation faster (but noiser). <-- 250
 
 data:
-  data_path: /Users/artem.semidetnov/Desktop/MetaGenerator_v1/dataset/
+  data_path: /Users/artem.semidetnov/Desktop/MetaGenerator_v1/datasets/dataset1/
   batch_size: 3  # effective_batch_size == batch_size * accumulate_grad_batches * devices
   eval_batch_size: 64
   max_inp_seq_len: 512

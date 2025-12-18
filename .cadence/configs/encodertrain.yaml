@@ -1,7 +1,7 @@
 project_name: JetBrains Team (owned by natalia.ponomareva@jetbrains.com)
 working_dir: "."
 cmd:
-- python -m main fit -c confs/cli_first_gpu_small.yaml
+- python -m main fit -c confs/cli_first_gpu.yaml
 provisioning:
   gpu_type: t4
   gpu_count: 1

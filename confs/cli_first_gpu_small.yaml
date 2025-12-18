@@ -4,7 +4,7 @@ trainer:
   devices: 1
   precision: bf16-mixed
   fast_dev_run: false
-  max_steps: 50000
+  max_steps: 23000
   max_epochs: 2
   check_val_every_n_epoch: 1
   num_sanity_val_steps: 0
@@ -29,7 +29,7 @@ model:
   eval_num_theorems: 200  # Lower this number will make validation faster (but noiser). <-- 250
 
 data:
-  data_path: ./dataset_small/
+  data_path: ./datasets/dataset_small1/
   batch_size: 3  # effective_batch_size == batch_size * accumulate_grad_batches * devices
   eval_batch_size: 64
   max_inp_seq_len: 512
