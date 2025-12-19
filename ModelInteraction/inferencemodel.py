@@ -23,7 +23,7 @@ def ask_model_prompt(prompt : dict, checkpoint_path : str, model, device) -> str
         outputs = model.generator.generate(
             input_ids=enc["input_ids"],
             attention_mask=enc["attention_mask"],
-            num_beams=getattr(model.hparams, "num_beams", 4),
+            num_beams=4, # getattr(model.hparams, "num_beams", 4),
             length_penalty=getattr(model.hparams, "length_penalty", 0.0),
             max_length=getattr(model.hparams, "max_oup_seq_len", 128),
         )
