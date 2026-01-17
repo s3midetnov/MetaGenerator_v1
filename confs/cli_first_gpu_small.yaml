@@ -29,8 +29,8 @@ model:
   eval_num_theorems: 200  # Lower this number will make validation faster (but noiser). <-- 250
 
 data:
-  data_path: ./datasets/dataset_small1/
-  batch_size: 3  # effective_batch_size == batch_size * accumulate_grad_batches * devices
+  data_path: ./datasets/dataset_small_with_addons/
+  batch_size: 4  # effective_batch_size == batch_size * accumulate_grad_batches * devices
   eval_batch_size: 64
   max_inp_seq_len: 512
   max_oup_seq_len: 128

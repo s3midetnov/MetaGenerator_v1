@@ -1,0 +1,54 @@
+project_name: JetBrains Team (owned by natalia.ponomareva@jetbrains.com)
+working_dir: "."
+cmd:
+- python -m main fit -c confs/cli_first_gpu_small.yaml
+provisioning:
+  gpu_type: t4
+  gpu_count: 1
+  cpu_count: 4
+  ram: 16
+  blank: false
+teamcity:
+  url: https://api.cadence.jetbrains.com
+  build_conf_id: id2f7519f525f7457f899938c06c46d14c_JetTrain
+env:
+  variables:
+    PYTHONUNBUFFERED: "1"
+  python:
+    pip:
+      requirements_path: requirements.txt
+    version: 3.9.6
+  secrets:
+    variables: {}
+    ssh_keys: []
+  aws:
+    sync_config: false
+    sync_credentials: false
+    sync_cache: false
+project_sync:
+  local:
+    root: "."
+    storage_name: Cadence Storage
+    uri: ""
+    exclude: []
+    include: []
+    sync_back: false
+    snapshots: true
+    storage_type: DEFAULT
+inputs: []
+outputs:
+- type: OUTPUT
+  storage_name: Cadence Storage
+  uri: ""
+  path: "."
+  acceleration: false
+  storage_type: DEFAULT
+- type: OUTPUT
+  storage_name: Cadence Storage
+  uri: ""
+  path: output
+  acceleration: false
+  storage_type: DEFAULT
+mounts: []
+storages: []
+description: ""

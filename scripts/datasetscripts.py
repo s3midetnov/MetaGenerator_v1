@@ -1,6 +1,6 @@
 import json
 import random
-from typing import List, Any, Optional
+from typing import List, Any, Optional, Tuple, Dict
 
 def parse_concatenated_json(path) -> List[Any]:
     objects = []
@@ -48,6 +48,90 @@ def format_augmented_goal(
     aug_s += s
     # print('xxxxxxxxxxx state xxxxxxxxxxxxxx = \n', aug_s)
     return aug_s
+
+def dump_data(data, path):
+    with open(path, 'w', encoding='utf-8') as f:
+        for entry in data:
+            f.write(json.dumps(entry) + "\n")
+
+
+
+def proportional_split(
+        A: List,
+        B: List,
+        train_ratio: float = 0.8,
+        val_ratio: float = 0.1,
+        test_ratio: float = 0.1,
+        shuffle: bool = True,
+        random_seed: int = 42
+) -> Dict[str, Dict[str, List]]:
+    """
+    Split two lists A and B proportionally into train, validation, and test sets.
+    Lists can have different lengths - each will be split according to the same ratios.
+
+    Args:
+        A: First list
+        B: Second list
+        train_ratio: Proportion for training set (default: 0.8)
+        val_ratio: Proportion for validation set (default: 0.1)
+        test_ratio: Proportion for test set (default: 0.1)
+        shuffle: Whether to shuffle before splitting (default: True)
+        random_seed: Random seed for reproducibility (default: 42)
+
+    Returns:
+        Dictionary containing train, val, test splits for both A and B
+    """
+    # Validate ratios
+    assert abs(train_ratio + val_ratio + test_ratio - 1.0) < 1e-6, \
+        "Ratios must sum to 1.0"
+
+    random.seed(random_seed)
+
+    def split_list(lst, shuffle_data):
+        n = len(lst)
+        indices = list(range(n))
+
+        # Shuffle indices if requested
+        if shuffle_data:
+            random.shuffle(indices)
+
+        # Calculate split points
+        train_end = int(n * train_ratio)
+        val_end = train_end + int(n * val_ratio)
+
+        # Split indices
+        train_idx = indices[:train_end]
+        val_idx = indices[train_end:val_end]
+        test_idx = indices[val_end:]
+
+        return {
+            'train': [lst[i] for i in train_idx],
+            'val': [lst[i] for i in val_idx],
+            'test': [lst[i] for i in test_idx]
+        }
+
+    # Split both lists independently
+    A_splits = split_list(A, shuffle)
+    B_splits = split_list(B, shuffle)
+
+    # Organize results
+    result = {
+        'train': {
+            'A': A_splits['train'],
+            'B': B_splits['train']
+        },
+        'val': {
+            'A': A_splits['val'],
+            'B': B_splits['val']
+        },
+        'test': {
+            'A': A_splits['test'],
+            'B': B_splits['test']
+        }
+    }
+
+    return result
+
 
 # Code that transforms Arend lib samples into trainable dataOld, LLM version 0
 def jsonl_to_prompt_refactor0(entry : dict) -> dict:

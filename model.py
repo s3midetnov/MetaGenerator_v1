@@ -77,26 +77,17 @@ class GeneratorModule(pl.LightningModule):
         )
         return loss
 
-    def configure_optimizers(self):
-        return torch.optim.Adam(self.parameters(), lr=1e-3)
-    # def configure_optimizers(self) -> Dict[str, Any]:
-    #     return get_optimizers(
-    #         self.parameters(), self.trainer, self.lr, self.warmup_steps
-    #     )
+    def configure_optimizers(self) -> Dict[str, Any]:
+        return get_optimizers(
+            self.parameters(), self.trainer, self.lr, self.warmup_steps
+        )
     def validation_step(self, batch, batch_idx):
         loss = self(
             batch["state_ids"],
             batch["state_mask"],
             batch["tactic_ids"],
         )
-        self.log(
-            "loss_val",
-            loss,
-            on_step=False,
-            on_epoch=True,
-            sync_dist=True,
-            batch_size=len(batch),
-        )
+        self.log("loss_val", loss, on_step=False, on_epoch=True, sync_dist=True, batch_size=len(batch))
         return loss
 
 # import pytorch_lightning as pl
